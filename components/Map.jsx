@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import MapView from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { useSelector } from "react-redux";
 import tw from "tailwind-react-native-classnames";
 import { selectOrigin } from "../slices/navSlice";
@@ -17,7 +17,19 @@ const Map = () => {
         latitudeDelta: 0.005,
         longitudeDelta: 0.005,
       }}
-    />
+    >
+      {origin?.location && (
+        <Marker
+          coordinate={{
+            latitude: origin.location.lat,
+            longitude: origin.location.lng,
+          }}
+          title="Origin"
+          description={origin.description}
+          identifier="origin"
+        />
+      )}
+    </MapView>
   );
 };
 
